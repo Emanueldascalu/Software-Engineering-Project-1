@@ -52,7 +52,7 @@ int initialize_players(player players[])
     printf("%s",*names1);
     }
    return numOfPlayers;
-}
+} 
     
    
      
