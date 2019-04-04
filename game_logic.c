@@ -1,5 +1,7 @@
 #include "game_init.h"
 #include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 
 void printLine();
 
@@ -63,7 +65,36 @@ void printLine(){
  */
 void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers){
     // TO BE IMPLEMENTED
-
+    int minNumTokens=0;
+    int selectedSquare=0;
+    board[NUM_ROWS][NUM_COLUMNS].numTokens=0;
+    int i, j;
+    
+    for(i=0;i<4;i++)
+    {
+        for(j=0;j<numPlayers;j++)
+        {
+            printf("Player %d please select a square.",j);
+            scanf("%d",&selectedSquare);
+            
+            if(board[selectedSquare][0].numTokens==minNumTokens && board[selectedSquare][0].stack->col!=players[j].col)
+            {
+                board[selectedSquare][0].stack=(token*)malloc(sizeof(token));
+                board[selectedSquare][0].stack->col=players[j].col;
+                board[selectedSquare][0].numTokens++;
+            
+                if(((numPlayers*i)+j+1)%NUM_ROWS==0)
+                minNumTokens++;
+            }
+            
+            else
+            {
+                printf("Error. Select a new square");
+                j--;
+            }
+                
+        }
+    }
 }
 
 
@@ -72,9 +103,9 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
  *        players - the array of the players
  *        numPlayers - the number of players.*/
 
-void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers){
+void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers)
+{
+    srand(time(NULL));
+    int die_roll=1+rand()%6;
     //TO BE IMPLEMENTED
 }
-
-
-
