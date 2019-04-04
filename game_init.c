@@ -6,7 +6,7 @@
 * This function creates the board for the first time
 * Input: board - a 6x9 array of squares.
 */
-void initialize_board(square board[NUM_ROWS]
+void initialize_board(square board[NUM_ROWS][NUM_COLUMNS])
 {
    
     
@@ -38,21 +38,29 @@ board[i][j].stack = NULL;
 * Input: the array of players to be initialized
 * Output: The number of players of the game 
 */
-int initialize_players(player players[])
+int initialize_players(player players[6])
 {
-    int i;
-    printf("Enter the number of players.\n");
-    scanf("%d",&numOfPlayers);
-    char *names[numOfPlayers];
- 
-    for(i=0;i<numOfPlayers;i++)
-    {
-    printf("Enter a name.\n");
-    scanf("%s",*names[i]);
-    printf("%s",*names1);
+    int i=0, option;
+    while(i<6)
+    {   
+        printf("Enter the name of the next player.\n");
+        scanf("%d", players[i]);
+        printf("Enter 1 to continue or 0 to stop entering names.\n");
+        scanf("%d", option);
+        
+        if(option==1)
+            i++;
+        
+        else if(option==0)
+            goto END;
+        
+        else
+            printf("Error.\n");
     }
-   return numOfPlayers;
-} 
+    
+   END:
+   return i;
+}
     
    
      
