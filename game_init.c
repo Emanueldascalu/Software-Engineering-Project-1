@@ -25,7 +25,8 @@ else
 //creates a normal square otherwise                
 board[i][j].type = NORMAL;            
 }
-board[i][j].stack = NULL;        
+board[i][j].stack = NULL;
+board[i][j].numTokens = 0;
 }    
 }
 
@@ -38,27 +39,28 @@ board[i][j].stack = NULL;
 * Input: the array of players to be initialized
 * Output: The number of players of the game 
 */
-int initialize_players(player players[6])
+int initialize_players(player players[])
 {
-    int i=0, option;
-    while(i<6)
+    int i=1, option;
+    while(option!=0)
     {   
         printf("Enter the name of the next player.\n");
-        scanf("%d", players[i]);
+        scanf("%s", &players->name[i-1]);
         printf("Enter 1 to continue or 0 to stop entering names.\n");
-        scanf("%d", option);
+        scanf("%d", &option);
         
         if(option==1)
             i++;
         
-        else if(option==0)
-            goto END;
+        //else if(option==0)
+          //  goto END;
         
-        else
+        if(option!=1)
+        {
             printf("Error.\n");
+        }
     }
-    
-   END:
+    printf("%d\n", i);
    return i;
 }
     
