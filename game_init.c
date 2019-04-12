@@ -35,19 +35,47 @@ void initialize_board(square board[NUM_ROWS][NUM_COLUMNS])
 int initialize_players(player players[])
 {
     int i=1, option;
+    char colour;
     
     while(option!=0)
     {
-        printf("Enter name of the player\n");
+        printf("Enter name for Player %d\n", i);
         scanf("%s", &players->names[i-1]);
-        printf("Enter 0 to stop inputting names");
-        scanf("%d", option);
-        i++;
-        
-        if(option!=1)
-        {
-            printf("Error");
+        printf("Select a colour: B, R, P, Y, G, O ?\n");
+        scanf(" %s", &colour);
+
+        switch(colour){
+                case 'B':
+                    players[i-1].col=BLUE;
+                    break;
+                case 'R':
+                    players[i-1].col=RED;
+                    break;
+                case 'P':
+                    players[i-1].col=PINK;
+                    break;
+                case 'Y':
+                    players[i-1].col=YELLOW;
+                    break;
+                case 'G':
+                    players[i-1].col=GREEN;
+                    break;
+                case 'O':
+                    players[i-1].col=ORANGE;
+                    break;
+                default:
+                    printf("Error\n");
+                    i--;
         }
+        
+        printf("Enter 1 to Input Names and 0 to Stop Inputting Names\n");
+        scanf("%d", &option);
+        
+        if(option==1)
+        {
+            i++;
+        }            
+ 
     }
     
     return i;
