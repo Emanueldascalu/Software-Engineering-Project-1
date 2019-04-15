@@ -23,8 +23,9 @@ enum color
 /* Defining a token and each token is associated with a colour */
 typedef struct token
 {
-   enum color col; 
-    
+   enum color col;
+   struct token *next;
+
 }
 token;
 
@@ -35,6 +36,7 @@ typedef struct square
      enum stype type;
      /* The stack of tokens that can be placed on the board square */
      token *stack;  
+     struct square *next;
      int numoftokens;
 }
 square;
@@ -54,11 +56,18 @@ player;
 /*  This function creates the board for the first time
     Input: board - a 6x9 array of squares   */
 void initialize_board(square board[NUM_ROWS][NUM_COLUMNS]);
+ token *topToken;
     
 /* This function creates players for the first time
    Input: the array of players to be initialised
    Output: The number of players of the game */
 int initialize_players(player players[]);
+
+void removeTokens(square board[NUM_ROWS][NUM_COLUMNS], int dice, player players[],int numPlayers, int choice, token *top);
+
+void updateTokens(square board[NUM_ROWS][NUM_COLUMNS], int dice, player players[], int numPlayers, int choice, token *top);
+
+void moveTokens(square board[NUM_ROWS][NUM_COLUMNS], int dice, player players[], int numPlayers);
 
 #endif	// GAME_H
 
