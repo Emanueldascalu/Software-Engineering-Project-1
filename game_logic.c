@@ -129,19 +129,16 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
     int dice;
     int row, column;
    
-    //while((players[0].numtokenlastcol != 3) || (players[1].numtokenlastcol != 3) || (players[2].numtokenlastcol != 3) || (players[3].numtokenlastcol != 3) || (players[4].numtokenlastcol != 3) || (players[5].numtokenlastcol != 3))
-    for(j=0;j<4;j++)   
+    while(players->numtokenlastcol != 3)   
     {
         for(i=1;i<=numPlayers;i++)
         {
             dice = rand()%5;
             printf("\nRolling the dice.\nDice = %d.\n\n", dice);
-            printf("The number of tokens on this square is %d.\n", board[dice][0].numoftokens);
-            printf("Player %d input:\n", i); 
-            printf("1 if you want to move one of your tokens up or down. Otherwise, chose 2 to move forward one.\n");
-
-            
+            printf("Player %d input: ", i); 
+            printf("1 if you want to move one of your tokens up or down.\nOtherwise, chose 2 to move forward a token on [%d].\n", dice);
             scanf("%d",&choice);
+            
             switch(choice)
             {
                 case 1:
@@ -149,43 +146,42 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                     scanf("%d", &row);
                     printf("Enter the column your token is located on.\n");
                     scanf("%d", &column);
-                    printf("Enter 1 to move up or 2 to move down.\n");
+                    printf("Enter 1 to move up or 2 to move down.\n\n");
                     scanf("%d", &choice1);
-                    if(choice1 == 1 && (row < 6 && row >= 1) && (column < 9 && column >= 0))// && (board[row][column].stack->col == players[i].col))
+                  
+                    if(choice1 == 1 && (row < 6 && row >= 1) && (column < 9 && column >= 0) && (board[row][column].stack->col == players[i-1].col))
                     {
-                        board[row-1][column].stack = addTokens(board[row][column].stack->col, board[row-1][column].stack);
-                        board[row][column].stack = removeTokens(board[row][column].stack);
-                        print_board(board);
-                        
-                        printf("Enter the column in which your chosen token is located.\n");
-                        scanf("%d", &column);
-                        if(column < 8 && column >=0 )
+                        if((row==1 && column==3) || (row==2 && column==6) || (row==3 && column==4) || (row==4 && column==5) || (row==5 && column==2))
                         {
-                            board[dice][column+1].stack = addTokens(board[dice][column].stack->col, board[dice][column+1].stack);
-                            board[dice][column].stack = removeTokens(board[dice][column].stack);
+                            printf("Error, Obstacle Ahead\n\n");
+                        }
+                        
+                        else
+                        {    
+                            board[row-1][column].stack = addTokens(players[i-1].col, board[row-1][column].stack);
+                            board[row][column].stack = removeTokens(board[row][column].stack);
                             print_board(board);
                         }
                     }
                     
-                    else if (choice1 == 2 && (row < 5 && row >= 0) && (column < 9 && column >= 0))// && (board[row][column].stack->col == players[i].col))
+                    else if (choice1 == 2 && (row < 5 && row >= 0) && (column < 9 && column >= 0) && (board[row][column].stack->col == players[i-1].col))
                     {
-                        board[row+1][column].stack = addTokens(board[row][column].stack->col, board[row+1][column].stack);
-                        board[row][column].stack = removeTokens(board[row][column].stack);
-                        print_board(board);
-                        
-                        printf("Enter the column in which your chosen token is located.\n");
-                        scanf("%d", &column);
-                        if(column < 8 && column >=0 )
+                        if((row==0 && column==6) || (row==1 && column==4) || (row==2 && column==5) || (row==3 && column==2) || (row==4 && column==7))
                         {
-                            board[dice][column+1].stack = addTokens(board[dice][column].stack->col, board[dice][column+1].stack);
-                            board[dice][column].stack = removeTokens(board[dice][column].stack);
+                            printf("Error, Obstacle Ahead\n\n");
+                        }
+                        
+                        else
+                        {
+                            board[row+1][column].stack = addTokens(players[i-1].col, board[row+1][column].stack);
+                            board[row][column].stack = removeTokens(board[row][column].stack);
                             print_board(board);
                         }
                     }
                     
                     else
                     {
-                        printf("Invalid input.\n");
+                        printf("Invalid input, Try Again.\n");
                         i--;
                     }
                     break;
@@ -195,18 +191,35 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
                     scanf("%d", &column);
                     if(column < 8 && column >=0 )
                     {
-                        board[dice][column+1].stack = addTokens(board[dice][column].stack->col, board[dice][column+1].stack);
-                        board[dice][column].stack = removeTokens(board[dice][column].stack);
-                        print_board(board);
+                        if((dice==0 && column==2) || (dice==1 && column==5) || (dice==2 && column==3) || (dice==3 && column==4) || (dice==4 && column==1) || (dice==5 && column==6))
+                        {
+                            printf("Error, Obstacle Ahead\n\n");
+                        }
+
+                        else
+                        {
+                         
+                            board[dice][column+1].stack = addTokens(players[i-1].col, board[dice][column+1].stack);
+                            board[dice][column].stack = removeTokens(board[dice][column].stack);
+                            print_board(board);
+                        
+                            if(column==7)
+                            {
+                                players[i-1].numtokenlastcol++;
+                            }
+                    }
                     }
                     break;
                     
                 default:
-                    printf("Invalid input.\n");
+                    printf("Invalid input, Try Again.\n");
                     i--;    
             }
+            
         }
     }
+    
+    printf("Winner is Player %d\n", i-1);
 }
 
 token * addTokens(enum color col, token * top)
