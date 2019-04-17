@@ -1,8 +1,3 @@
-
-/*  Monica Adeyanju 
-    Group Project */
-
-/* Defining the columns and rows */
 #ifndef GAME_H
 #define GAME_H
 
@@ -26,8 +21,7 @@ typedef struct token
    enum color col;
    struct token *next;
 
-}
-token;
+}token;
 
 /* Defining the squares */
 typedef struct square
@@ -36,10 +30,9 @@ typedef struct square
      enum stype type;
      /* The stack of tokens that can be placed on the board square */
      token *stack;  
-     struct square *next;
+     //struct square *next;
      int numoftokens;
-}
-square;
+}square;
 
 /*  You need to fill this data structure
     with the information about the player
@@ -48,26 +41,17 @@ typedef struct player
 {
     enum color col;
     char names[20];
-    int numtokenlastcol;
-    
-}
-player; 
+    int numtokenlastcol;    
+}player; 
 
 /*  This function creates the board for the first time
     Input: board - a 6x9 array of squares   */
 void initialize_board(square board[NUM_ROWS][NUM_COLUMNS]);
- token *topToken;
-    
+ 
 /* This function creates players for the first time
    Input: the array of players to be initialised
    Output: The number of players of the game */
 int initialize_players(player players[]);
-
-void removeTokens(square board[NUM_ROWS][NUM_COLUMNS], int dice, player players[],int numPlayers, int choice, token *top);
-
-void updateTokens(square board[NUM_ROWS][NUM_COLUMNS], int dice, player players[], int numPlayers, int choice, token *top);
-
-void moveTokens(square board[NUM_ROWS][NUM_COLUMNS], int dice, player players[], int numPlayers);
 
 #endif	// GAME_H
 
