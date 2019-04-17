@@ -41,7 +41,7 @@ int initialize_players(player players[])
     {
         printf("Enter name for Player %d\n", i);
         scanf("%s", &players->names[i-1]);
-        printf("Select a colour: Pink = 1\nRed = 2\nBlue = 3\nGreen = 4\nOrange = 5\nYellow = 6\n");
+        printf("Select a colour: \nPink = 1\nRed = 2\nBlue = 3\nGreen = 4\nOrange = 5\nYellow = 6\n");
         scanf(" %d", &colour);
 
         switch(colour){
@@ -80,7 +80,7 @@ int initialize_players(player players[])
         if(option==1)
         {
             i++;
-        }            
+        }           
  
     }
     
