@@ -26,71 +26,69 @@ void initialize_board(square board[NUM_ROWS][NUM_COLUMNS])
             board[i][j].numoftokens = 0;
         }
     }
-}
-    
-    
+} 
  /* This function creates players for the first time
     Input: the array of players to be initialised 
     Output: The number of players of the game   */
 int initialize_players(player players[])
 {
     int i=1, option;
-    int colour;
+    char colour;
     
     while(option!=0)
     {
-        printf("Enter name for Player %d\n", i);
-        scanf("%s", &players->names[i-1]);
-        printf("Select a colour: \nPink = 1\nRed = 2\nBlue = 3\nGreen = 4\nOrange = 5\nYellow = 6\n");
-        scanf(" %d", &colour);
+        printf("Enter name for Player %d.\n", i);
+        scanf("%s", &players[i-1].names);
+        printf("Select a colour:\n'B' for Blue,\n'R' for Red,\n'P' for Pink,\n'Y' for Yellow,\n'G' for Green,\n'O' for Orange.\n");
+        scanf("%s", &colour);
 
-        switch(colour){
-                case 1:
-                    players[i-1].col=PINK;
+        switch(colour)
+        {
+                case 'B':
+                    players[i-1].col = BLUE;
                     players[i-1].numtokenlastcol = 0;
                     break;
-                case 2:
-                    players[i-1].col=RED;
+                    
+                case 'R':
+                    players[i-1].col = RED;
                     players[i-1].numtokenlastcol = 0;
                     break;
-                case 3:
-                    players[i-1].col=BLUE;
+                    
+                case 'P':
+                    players[i-1].col = PINK;
                     players[i-1].numtokenlastcol = 0;
                     break;
-                case 4:
-                    players[i-1].col=GREEN;
+                    
+                case 'Y':
+                    players[i-1].col = YELLOW;
                     players[i-1].numtokenlastcol = 0;
                     break;
-                case 5:
-                    players[i-1].col=ORANGE;
+                    
+                case 'G':
+                    players[i-1].col = GREEN;
                     players[i-1].numtokenlastcol = 0;
                     break;
-                case 6:
-                    players[i-1].col=YELLOW;
+                    
+                case 'O':
+                    players[i-1].col = ORANGE;
                     players[i-1].numtokenlastcol = 0;
                     break;
+                    
                 default:
-                    printf("Error\n");
+                    printf("Invalid input. Choose either 'B', 'R', 'P', 'Y', 'G' or 'O'.\n");
                     i--;
         }
-        
-        printf("Enter 1 to Input Names and 0 to Stop Inputting Names\n");
+
+        printf("Enter 1 to continue inputting names and 0 to stop inputting names.\n");
         scanf("%d", &option);
         
         if(option==1)
         {
             i++;
-        }           
+        }            
  
     }
     
     return i;
    
 }
-
-
-    
-   
-     
-
-
