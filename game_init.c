@@ -5,7 +5,6 @@
     Input: board - a 6x9 array of squares  */
 void initialize_board(square board[NUM_ROWS][NUM_COLUMNS])
 {
-   
     for (int i =0; i< NUM_ROWS; i++)
     {
         for(int j =0; j < NUM_COLUMNS; j++)
@@ -22,6 +21,7 @@ void initialize_board(square board[NUM_ROWS][NUM_COLUMNS])
                 board[i][j].type = NORMAL;
             }
             
+            /* Assigning the stack and the number of tokens on each square to null and zero before placing tokens on the square */
             board[i][j].stack = NULL;
             board[i][j].numoftokens = 0;
         }
@@ -37,11 +37,13 @@ int initialize_players(player players[])
     
     while(option!=0)
     {
+        /* Asking for the player's input for their name and colour */
         printf("Enter name for Player %d.\n", i);
         scanf("%s", &players[i-1].names);
         printf("Select a colour:\n'B' for Blue,\n'R' for Red,\n'P' for Pink,\n'Y' for Yellow,\n'G' for Green,\n'O' for Orange.\n");
         scanf("%s", &colour);
 
+        /* We are using a switch statement to assign the selected colour and the number of tokens in the last column to zero */
         switch(colour)
         {
                 case 'B':
@@ -75,6 +77,7 @@ int initialize_players(player players[])
                     break;
                     
                 default:
+                    /* Decrementing "i" so it can give the player a chance to input a new colour */
                     printf("Invalid input. Choose either 'B', 'R', 'P', 'Y', 'G' or 'O'.\n");
                     i--;
         }
@@ -86,9 +89,8 @@ int initialize_players(player players[])
         {
             i++;
         }            
- 
     }
     
+    /* Returning i as this the number of players */
     return i;
-   
 }
