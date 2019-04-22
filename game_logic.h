@@ -15,9 +15,12 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
     numPlayers - the number of players */
 void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers);
 
-
+/* This function adds tokens onto the stack and takes
+   the colour of the token into consideration */
 token * addTokens(enum color col, token * top);
 
+/* This function removes tokens from the stack when a 
+   token is being moved vertically or horizontally */
 token * removeTokens(token * top);
 
 #endif	// GAMELOGIC_H
