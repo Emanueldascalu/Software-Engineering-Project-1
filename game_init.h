@@ -15,7 +15,7 @@ enum color
     RED, BLUE, GREEN, YELLOW, PINK, ORANGE
 };
 
-/* Defining a token and each token is associated with a colour */
+/* Defining a token and each token is associated with a colour and the next token*/
 typedef struct token
 {
    enum color col;
@@ -30,7 +30,7 @@ typedef struct square
      enum stype type;
      /* The stack of tokens that can be placed on the board square */
      token *stack;  
-     //struct square *next;
+     /* The number of tokens on each square */
      int numoftokens;
 }square;
 
